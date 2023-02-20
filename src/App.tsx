@@ -17,8 +17,8 @@ function App() {
   const [debouncedIncrement] = useDebounceFn(increment, 3000);
   const [debouncedIncrementV2] = useDebounceFnV2(incrementV2, 3000);
 
-  const [throttledIncrement] = useDebounceFn(increment, 3000);
-  const [throttledIncrementV2] = useDebounceFnV2(incrementV2, 3000);
+  const [throttledIncrement] = useThrottleFn(incrementV3, 3000);
+  const [throttledIncrementV2] = useThrottleFnV2(incrementV4, 3000);
 
   useEffect(() => {
     setInterval(incrementTime, 1000);
@@ -38,11 +38,11 @@ function App() {
           </button>
         </p>
         <p>
-          <button type="button" onClick={debouncedIncrement}>
-            debounced count is: {count}
+          <button type="button" onClick={throttledIncrement}>
+            throttled count is: {countV3}
           </button>
-          <button type="button" onClick={debouncedIncrementV2}>
-            debounced count v2 is: {countV2}
+          <button type="button" onClick={throttledIncrementV2}>
+            throttled count v2 is: {countV4}
           </button>
         </p>
         <p>
