@@ -1,19 +1,32 @@
-import { useCounter } from './hooks/useCounter'
-import './App.css'
+import { useCounter } from './hooks/useCounter';
+import './App.css';
+import { useDebounceFn } from './hooks/useDebounce';
+import useDebounceV2 from './hooks/useDebounceV2';
+import { useEffect } from 'react';
 
 function App() {
-  const { count, increment } = useCounter()
+  const { count, increment } = useCounter();
+  const { count: countV2, increment: incrementV2 } = useCounter();
+  const { count: time, increment: incrementTime } = useCounter();
+
+  const [debouncedIncrement, _] = useDebounceFn(increment, 3000);
+  const [debouncedIncrementV2, __] = useDebounceV2(incrementV2, 3000);
+
+  useEffect(() => {
+    setInterval(incrementTime, 1000);
+  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
         <p>Hello Vite + React!</p>
+        <p>time is: {time}</p>
         <p>
-          <button
-            type="button"
-            onClick={increment}
-          >
-            count is: {count}
+          <button type="button" onClick={debouncedIncrement}>
+            debounced count is: {count}
+          </button>
+          <button type="button" onClick={debouncedIncrementV2}>
+            debounced count v2 is: {countV2}
           </button>
         </p>
         <p>
@@ -40,7 +53,7 @@ function App() {
         </p>
       </header>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

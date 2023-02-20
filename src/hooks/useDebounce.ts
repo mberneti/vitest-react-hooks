@@ -14,7 +14,7 @@ export function useDebounce<T>(value: T, delay = 200) {
 }
 
 interface UseDebounceFn {
-  callback: (data: any) => void;
+  callback: (data?: any) => void;
   delay?: number;
 }
 
