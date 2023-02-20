@@ -24,7 +24,8 @@
     "@vitest/ui": "latest",
     "jsdom": "latest",
     "vite": "latest",
-    "vitest": "latest"
+    "vitest": "latest",
+    "@types/node": "18.14.0"
   },
   "stackblitz": {
     "startCommand": "npm run test:ui"
