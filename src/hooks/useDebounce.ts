@@ -13,12 +13,7 @@ export function useDebounce<T>(value: T, delay = 200) {
   return debouncedValue;
 }
 
-interface UseDebounceFn {
-  callback: (data?: any) => void;
-  delay?: number;
-}
-
-export function useDebounceFn({ callback, delay = 200 }: UseDebounceFn) {
+export function useDebounceFn(callback: (data?: any) => void, delay = 200) {
   const timeOutRef = useRef<string | number | NodeJS.Timer>();
   const pendingRef = useRef(false);
 
@@ -36,8 +31,5 @@ export function useDebounceFn({ callback, delay = 200 }: UseDebounceFn) {
     callback(data);
   };
 
-  return {
-    action,
-    reset,
-  };
+  return [action, reset];
 }

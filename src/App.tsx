@@ -1,7 +1,7 @@
 import { useCounter } from './hooks/useCounter';
 import './App.css';
 import { useDebounceFn } from './hooks/useDebounce';
-import useDebounceV2 from './hooks/useDebounceV2';
+import { useDebounceFnV2 } from './hooks/useDebounceV2';
 import { useEffect } from 'react';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
   const { count: time, increment: incrementTime } = useCounter();
 
   const [debouncedIncrement, _] = useDebounceFn(increment, 3000);
-  const [debouncedIncrementV2, __] = useDebounceV2(incrementV2, 3000);
+  const [debouncedIncrementV2, __] = useDebounceFnV2(incrementV2, 3000);
 
   useEffect(() => {
     setInterval(incrementTime, 1000);

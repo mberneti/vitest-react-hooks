@@ -1,17 +1,9 @@
 import { useDebounceFn } from 'ahooks';
 
-interface UseDebounceFn {
-  callback: (data?: any) => void;
-  delay?: number;
-}
-
-export function useDebounceFn({ callback, delay = 200 }: UseDebounceFn) {
+export function useDebounceFnV2(callback: (data?: any) => void, delay = 200) {
   const { run, cancel } = useDebounceFn(callback, {
     wait: delay,
   });
 
-  return {
-    action: run,
-    reset: cancel,
-  };
+  return [run, cancel];
 }
