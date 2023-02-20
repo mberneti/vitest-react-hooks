@@ -2,15 +2,23 @@ import { useCounter } from './hooks/useCounter';
 import './App.css';
 import { useDebounceFn } from './hooks/useDebounce';
 import { useDebounceFnV2 } from './hooks/useDebounceV2';
+import { useThrottleFn } from './hooks/useThrottle';
+import { useThrottleFnV2 } from './hooks/useThrottleV2';
 import { useEffect } from 'react';
 
 function App() {
-  const { count, increment } = useCounter();
-  const { count: countV2, increment: incrementV2 } = useCounter();
-  const { count: time, increment: incrementTime } = useCounter();
+  const [time, incrementTime] = useCounter();
 
-  const [debouncedIncrement, _] = useDebounceFn(increment, 3000);
-  const [debouncedIncrementV2, __] = useDebounceFnV2(incrementV2, 3000);
+  const [count, increment] = useCounter();
+  const [countV2, incrementV2] = useCounter();
+  const [countV3, incrementV3] = useCounter();
+  const [countV4, incrementV4] = useCounter();
+
+  const [debouncedIncrement] = useDebounceFn(increment, 3000);
+  const [debouncedIncrementV2] = useDebounceFnV2(incrementV2, 3000);
+
+  const [throttledIncrement] = useDebounceFn(increment, 3000);
+  const [throttledIncrementV2] = useDebounceFnV2(incrementV2, 3000);
 
   useEffect(() => {
     setInterval(incrementTime, 1000);
@@ -21,6 +29,14 @@ function App() {
       <header className="App-header">
         <p>Hello Vite + React!</p>
         <p>time is: {time}</p>
+        <p>
+          <button type="button" onClick={debouncedIncrement}>
+            debounced count is: {count}
+          </button>
+          <button type="button" onClick={debouncedIncrementV2}>
+            debounced count v2 is: {countV2}
+          </button>
+        </p>
         <p>
           <button type="button" onClick={debouncedIncrement}>
             debounced count is: {count}

@@ -1,11 +1,6 @@
 import { useRef } from 'react';
 
-interface UseThrottle<T> {
-  callback: (data?: T) => void;
-  delay: number;
-}
-
-export default function useThrottle<T>({ callback, delay }: UseThrottle<T>) {
+export function useThrottleFn<T>(callback: (data?: T) => void, delay: number) {
   const timeOutRef = useRef<NodeJS.Timer>();
   const pendingRef = useRef(false);
   const hasEndRef = useRef(false);
@@ -33,8 +28,5 @@ export default function useThrottle<T>({ callback, delay }: UseThrottle<T>) {
     callback(data);
   };
 
-  return {
-    action,
-    reset,
-  };
+  return [action, reset];
 }
