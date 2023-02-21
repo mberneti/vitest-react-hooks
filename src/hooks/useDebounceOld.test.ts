@@ -1,5 +1,6 @@
 import { useDebounceFn } from './useDebounce';
 import { act, renderHook } from '@testing-library/react-hooks';
+import { vi as jest } from 'vitest';
 
 const reRun = async (callback: Function, count = 1, delay = 20) => {
   callback();
