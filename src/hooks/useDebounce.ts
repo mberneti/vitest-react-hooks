@@ -14,19 +14,21 @@ export function useDebounce<T>(value: T, delay = 200) {
 }
 
 export function useDebounceFn(callback: (data?: any) => void, delay = 200) {
-  const timeOutRef = useRef<string | number | NodeJS.Timer>();
+  const timeOutRef = useRef<ReturnType<typeof setTimeout>>();
   const pendingRef = useRef(false);
-
   const reset = () => {
     pendingRef.current = false;
-    clearTimeout(timeOutRef.current);
+    if (timeOutRef.current) {
+      clearTimeout(timeOutRef.current);
+    }
   };
 
-  const action = (data: any) => {
+  const action = (data?: unknown) => {
     if (pendingRef.current) return;
     timeOutRef.current = setTimeout(() => {
       pendingRef.current = false;
     }, delay);
+
     pendingRef.current = true;
     callback(data);
   };
